@@ -30,11 +30,12 @@ public class DialogListPromote extends Dialog {
         void close();
     }
 
-    public static DialogListPromote getInstance(Context mContext, OnResult onResult) {
+    public static DialogListPromote getInstance(Context mContext, List<Promote> listItem, OnResult onResult) {
         DialogListPromote dialogListPromote = new DialogListPromote(mContext, android.R.style.Theme_Black_NoTitleBar_Fullscreen);
         dialogListPromote.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
         dialogListPromote.mContext = mContext;
         dialogListPromote.mOnResult = onResult;
+        dialogListPromote.listItem = listItem;
         dialogListPromote.initData();
         dialogListPromote.initControl();
         return dialogListPromote;
@@ -46,15 +47,6 @@ public class DialogListPromote extends Dialog {
     }
 
     private void initData() {
-        Promote promote = new Promote(true, "", "", "Volume Booster - Music Player MP3 with Equalizer"
-                , "com.xxx.yyy.zzz1", "Volume Booster1");
-        Promote promote1 = new Promote(false, "", "", "Volume Booster - Music Player MP3 with Equalizer"
-                , "com.xxx.yyy.zzz2", "Volume Booster2");
-        Promote promote2 = new Promote(true, "", "", "Volume Booster - Music Player MP3 with Equalizer"
-                , "com.xxx.yyy.zzz3", "Volume Booster3");
-        listItem.add(promote);
-        listItem.add(promote1);
-        listItem.add(promote2);
         promoteAdapter = new PromoteAdapter(listItem, mContext);
         GridLayoutManager layoutManager = new GridLayoutManager(mContext, 1, GridLayoutManager.VERTICAL, false);
         mRecyclerView.setLayoutManager(layoutManager);

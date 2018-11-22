@@ -17,7 +17,8 @@ public class MainActivity extends AppCompatActivity {
         tvHello.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                PromoteMaster.Instance(MainActivity.this,true);
+                PromoteMaster promoteMaster = new PromoteMaster();
+                promoteMaster.Instance(MainActivity.this,true);
             }
         });
     }

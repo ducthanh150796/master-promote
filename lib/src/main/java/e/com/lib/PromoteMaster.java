@@ -20,13 +20,6 @@ public class PromoteMaster {
         }
         GetContacts getContacts = new GetContacts(mContext);
         getContacts.execute();
-//        DialogListPromote mDialogListPromote = DialogListPromote.getInstance(mContext, new DialogListPromote.OnResult() {
-//            @Override
-//            public void close() {
-//
-//            }
-//        });
-//        mDialogListPromote.show();
     }
 
     public class GetContacts extends AsyncTask<Void, Void, List<Promote>> {
@@ -46,7 +39,18 @@ public class PromoteMaster {
             List<Promote> listPromotes = new ArrayList<>();
             HttpHandler sh = new HttpHandler();
             String url = "https://raw.githubusercontent.com/ducthanh150796/master-promote/master/promote.txt";
-            String jsonStr = sh.makeServiceCall(url);
+            String jsonStr = "{\n" +
+                    "    \"promote\":[\n" +
+                    "\t    {\n" +
+                    "            \"is-show-promote\":\"true\",\n" +
+                    "            \"package-name\":\"com.xxx.yyy.zzz\",\n" +
+                    "            \"title\":\"Volume Booster\",\n" +
+                    "            \"short-des\":\"Volume Booster - Music Player MP3 with Equalizer\",\n" +
+                    "            \"img\":\"https://www.google.com.vn/search?q=dragon&source=lnms&tbm=isch&sa=X&ved=0ahUKEwjC_ZW19KzbAhUGbrwKHbf_DvoQ_AUICigB&biw=1898&bih=929#imgrc=IGx6nToL-tSbLM:\",\n" +
+                    "\t        \"background\":\"\"\n" +
+                    "        }\n" +
+                    "    ]\n" +
+                    "}";
             Log.e("TAG", "Response from url: " + jsonStr);
             if (jsonStr != null) {
                 try {
@@ -76,7 +80,18 @@ public class PromoteMaster {
         protected void onPostExecute(List<Promote> result) {
             super.onPostExecute(result);
             promoteList.clear();
-            promoteList.addAll(result);
+            for (int i = 0; i < result.size(); i++) {
+                if (result.get(i).isShow()) {
+                    promoteList.add(result.get(i));
+                }
+            }
+            DialogListPromote mDialogListPromote = DialogListPromote.getInstance(mContext, promoteList, new DialogListPromote.OnResult() {
+                @Override
+                public void close() {
+
+                }
+            });
+            mDialogListPromote.show();
         }
     }
 
