@@ -68,6 +68,9 @@ public class DialogListPromote extends Dialog {
             public void remove(int position) {
                 listItem.remove(position);
                 promoteAdapter.notifyDataSetChanged();
+                if (listItem.size()==0){
+                    btnClose.callOnClick();
+                }
             }
         });
 

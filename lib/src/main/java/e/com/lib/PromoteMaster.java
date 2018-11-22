@@ -13,6 +13,7 @@ import java.util.List;
 
 public class PromoteMaster {
     private List<Promote> promoteList = new ArrayList<>();
+    private static final String SAVE_SHARE = "save share";
 
     public void Instance(Context mContext, boolean isShow) {
         if (!isShow) {
@@ -39,39 +40,17 @@ public class PromoteMaster {
             List<Promote> listPromotes = new ArrayList<>();
             HttpHandler sh = new HttpHandler();
             String url = "https://raw.githubusercontent.com/ducthanh150796/master-promote/master/promote.txt";
-            String jsonStr = "{\n" +
-                    "    \"promote\":[\n" +
-                    "\t    {\n" +
-                    "            \"is-show-promote\":\"true\",\n" +
-                    "            \"package-name\":\"com.xxx.yyy.zzz\",\n" +
-                    "            \"title\":\"Volume Booster\",\n" +
-                    "            \"short-des\":\"Volume Booster - Music Player MP3 with Equalizer\",\n" +
-                    "            \"img\":\"https://www.google.com.vn/search?q=dragon&source=lnms&tbm=isch&sa=X&ved=0ahUKEwjC_ZW19KzbAhUGbrwKHbf_DvoQ_AUICigB&biw=1898&bih=929#imgrc=IGx6nToL-tSbLM:\",\n" +
-                    "\t        \"background\":\"\"\n" +
-                    "        }\n" +
-                    "    ]\n" +
-                    "}";
+            String jsonStr = sh.makeServiceCall(url);
             Log.e("TAG", "Response from url: " + jsonStr);
             if (jsonStr != null) {
-                try {
-                    JSONObject jsonObj = new JSONObject(jsonStr);
-                    JSONArray contacts = jsonObj.getJSONArray("promote");
-                    for (int i = 0; i < contacts.length(); i++) {
-                        JSONObject c = contacts.getJSONObject(i);
-                        boolean iShow = c.getBoolean("is-show-promote");
-                        String packageName = c.getString("package-name");
-                        String title = c.getString("title");
-                        String description = c.getString("short-des");
-                        String img = c.getString("img");
-                        String background = c.getString("background");
-                        listPromotes.add(new Promote(iShow, img, background, packageName, description, title));
-                    }
-                } catch (final JSONException e) {
-                    Log.e("TAG", "Json parsing error: " + e.getMessage());
-                }
-
+                PublicMethod.saveSettings(mContext, SAVE_SHARE, jsonStr);
+                listPromotes.addAll(getListDataFromStr(jsonStr));
             } else {
                 Log.e("TAG", "Couldn't get json from server.");
+                String getShare = PublicMethod.getSetting(mContext, SAVE_SHARE);
+                if (getShare != null && !getShare.equals("")) {
+                    listPromotes.addAll(getListDataFromStr(getShare));
+                }
             }
             return listPromotes;
         }
@@ -85,14 +64,37 @@ public class PromoteMaster {
                     promoteList.add(result.get(i));
                 }
             }
-            DialogListPromote mDialogListPromote = DialogListPromote.getInstance(mContext, promoteList, new DialogListPromote.OnResult() {
-                @Override
-                public void close() {
+            if (promoteList.size() != 0) {
+                DialogListPromote mDialogListPromote = DialogListPromote.getInstance(mContext, promoteList, new DialogListPromote.OnResult() {
+                    @Override
+                    public void close() {
 
-                }
-            });
-            mDialogListPromote.show();
+                    }
+                });
+                mDialogListPromote.show();
+            }
         }
+    }
+
+    public List<Promote> getListDataFromStr(String jsonStr) {
+        List<Promote> list = new ArrayList<>();
+        try {
+            JSONObject jsonObj = new JSONObject(jsonStr);
+            JSONArray contacts = jsonObj.getJSONArray("promote");
+            for (int i = 0; i < contacts.length(); i++) {
+                JSONObject c = contacts.getJSONObject(i);
+                boolean iShow = c.getBoolean("is-show-promote");
+                String packageName = c.getString("package-name");
+                String title = c.getString("title");
+                String description = c.getString("short-des");
+                String img = c.getString("img");
+                String background = c.getString("background");
+                list.add(new Promote(iShow, img, background, packageName, description, title));
+            }
+        } catch (final JSONException e) {
+            Log.e("TAG", "Json parsing error: " + e.getMessage());
+        }
+        return list;
     }
 
 }

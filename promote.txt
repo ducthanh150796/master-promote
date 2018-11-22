@@ -5,8 +5,8 @@
             "package-name":"com.xxx.yyy.zzz",
             "title":"Volume Booster",
             "short-des":"Volume Booster - Music Player MP3 with Equalizer",
-            "img":"http://202.182.103.25/icon.png?fbclid=IwAR3T3HCnEh-icEV3824usnX9uZB4KQqmsuKRfBEvVpYetqQ4u_ijda7QBLM",
-	        "background":"http://202.182.103.25/image1.jpg?fbclid=IwAR1ZvbahX7cZR1GDs0qtiIz-Fd3cOCIZVg84qMtfeUrzv23jyWZDy_MfKDs"
+            "img":"https://instagram-brand.com/wp-content/uploads/2016/11/app-icon2.png",
+	        "background":"https://media.boingboing.net/wp-content/uploads/2018/05/cool-background1.png"
         }
     ]
 }

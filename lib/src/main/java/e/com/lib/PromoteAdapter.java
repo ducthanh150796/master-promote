@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -36,7 +37,10 @@ public class PromoteAdapter extends RecyclerView.Adapter<PromoteAdapter.ViewHold
             viewHolder.tvName.setSelected(true);
             viewHolder.tvName.setText(promote.getTitle() + "");
             viewHolder.tvDes.setText(promote.getDescription() + "");
-//            Glide.with(mContext).load(promote.getmImage()).into(viewHolder.imIcon);
+            Picasso.with(mContext).load(promote.getmImage()).centerCrop()
+                    .resize(PublicMethod.dpToPx(80,mContext.getResources()),PublicMethod.dpToPx(80,mContext.getResources()))
+                    .into(viewHolder.imIcon);
+            Picasso.with(mContext).load(promote.getBanner()).into(viewHolder.imBanner);
             viewHolder.tvInstall.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -63,6 +67,7 @@ public class PromoteAdapter extends RecyclerView.Adapter<PromoteAdapter.ViewHold
         private ImageView imIcon;
         private TextView tvInstall;
         private TextView tvClose;
+        private ImageView imBanner;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -71,6 +76,7 @@ public class PromoteAdapter extends RecyclerView.Adapter<PromoteAdapter.ViewHold
             tvInstall = itemView.findViewById(R.id.tv_install);
             imIcon = itemView.findViewById(R.id.im_icon);
             tvClose = itemView.findViewById(R.id.tv_close);
+            imBanner = itemView.findViewById(R.id.im_banner);
         }
     }
 
