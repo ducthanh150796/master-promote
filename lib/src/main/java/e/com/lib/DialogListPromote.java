@@ -48,7 +48,7 @@ public class DialogListPromote extends Dialog {
     private void initData() {
         Promote promote = new Promote(true, "", "", "Volume Booster - Music Player MP3 with Equalizer"
                 , "com.xxx.yyy.zzz1", "Volume Booster1");
-        Promote promote1 = new Promote(true, "", "", "Volume Booster - Music Player MP3 with Equalizer"
+        Promote promote1 = new Promote(false, "", "", "Volume Booster - Music Player MP3 with Equalizer"
                 , "com.xxx.yyy.zzz2", "Volume Booster2");
         Promote promote2 = new Promote(true, "", "", "Volume Booster - Music Player MP3 with Equalizer"
                 , "com.xxx.yyy.zzz3", "Volume Booster3");
