@@ -15,6 +15,6 @@
     }
 
 - Use.
-    PromoteMaster promoteMaster = new PromoteMaster();
+    PromoteMaster promoteMaster = new PromoteMaster(); \n
     promoteMaster.Instance(MainActivity.this, true);
   
