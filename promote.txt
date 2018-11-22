@@ -1,10 +1,12 @@
-"promote":[
-	{  
-         "is-show-promote":"true",
-         "package-name":"com.xxx.yyy.zzz",
-         "title":"Volume Booster",
-         "short-des":"Volume Booster - Music Player MP3 with Equalizer",
-         "img":"https://www.google.com.vn/search?q=dragon&source=lnms&tbm=isch&sa=X&ved=0ahUKEwjC_ZW19KzbAhUGbrwKHbf_DvoQ_AUICigB&biw=1898&bih=929#imgrc=IGx6nToL-tSbLM:",
-	     "background":""
-      }
-]
+{
+    "promote":[
+	    {
+            "is-show-promote":"true",
+            "package-name":"com.xxx.yyy.zzz",
+            "title":"Volume Booster",
+            "short-des":"Volume Booster - Music Player MP3 with Equalizer",
+            "img":"https://www.google.com.vn/search?q=dragon&source=lnms&tbm=isch&sa=X&ved=0ahUKEwjC_ZW19KzbAhUGbrwKHbf_DvoQ_AUICigB&biw=1898&bih=929#imgrc=IGx6nToL-tSbLM:",
+	        "background":""
+        }
+    ]
+}
