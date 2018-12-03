@@ -8,7 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import com.squareup.picasso.Picasso;
+
 
 import java.util.List;
 
@@ -37,10 +37,15 @@ public class PromoteAdapter extends RecyclerView.Adapter<PromoteAdapter.ViewHold
             viewHolder.tvName.setSelected(true);
             viewHolder.tvName.setText(promote.getTitle() + "");
             viewHolder.tvDes.setText(promote.getDescription() + "");
-            Picasso.with(mContext).load(promote.getmImage()).centerCrop()
-                    .resize(PublicMethod.dpToPx(80,mContext.getResources()),PublicMethod.dpToPx(80,mContext.getResources()))
-                    .into(viewHolder.imIcon);
-            Picasso.with(mContext).load(promote.getBanner()).into(viewHolder.imBanner);
+            LoadImage loadImage = new LoadImage(promote.getmImage(), viewHolder.imIcon);
+            loadImage.execute();
+
+            LoadImage loadImage1 = new LoadImage(promote.getBanner(), viewHolder.imBanner);
+            loadImage1.execute();
+//            Picasso.with(mContext).load(promote.getmImage()).centerCrop()
+//                    .resize(PublicMethod.dpToPx(80,mContext.getResources()),PublicMethod.dpToPx(80,mContext.getResources()))
+//                    .into(viewHolder.imIcon);
+//            Picasso.with(mContext).load(promote.getBanner()).into(viewHolder.imBanner);
             viewHolder.tvInstall.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
