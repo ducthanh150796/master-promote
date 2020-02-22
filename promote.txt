@@ -1,5 +1,5 @@
 {
-	"show_ads":"false",
+	"show_ads":"true",
     "promote":[
 	    {
             "is-show-promote":"true",
