@@ -1,7 +1,7 @@
 {
     "promote":[
 	    {
-            "is-show-promote":"true",
+            "is-show-promote":"false",
             "package-name":"com.xxx.yyy.zzz",
             "title":"Volume Booster",
             "short-des":"Volume Booster - Music Player MP3 with Equalizer",
